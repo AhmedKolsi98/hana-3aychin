@@ -1,73 +1,112 @@
-# React + TypeScript + Vite
+# هانا عايشين
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hana 3aychin (هانا عايشين) is a practical, citizen-built digital guide for living through recurring outages, extreme heat, and daily infrastructure stress.
 
-Currently, two official plugins are available:
+The project is designed as a lightweight, offline-first knowledge base that helps households make better decisions when electricity, water, communication, or basic services become unreliable.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What this project is
 
-## React Compiler
+This app collects useful, actionable guidance in a simple mobile-friendly format. Instead of relying on scattered tips across social media or private chats, it centralizes neighborhood-level survival information into one accessible reference.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The content is organized around the kinds of challenges people face in real life:
 
-## Expanding the ESLint configuration
+- electrical safety and appliance protection
+- water storage and purification
+- heat stress and emergency health guidance
+- food preservation and safe storage
+- remote work continuity during outages
+- emergency contacts and useful apps
+- household lighting and security
+- passive cooling and resilient home practices
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Why it exists
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The project was created to answer a simple need: when systems fail, people need reliable, easy-to-use information that is available even without internet access.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+It focuses on practical, low-tech, life-saving advice that can be immediately applied in homes, apartments, and communities.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Key features
+
+- Offline-first experience using a PWA approach
+- Mobile-friendly Arabic interface
+- Structured article content by topic
+- Emergency numbers and practical checklists
+- Simple navigation for quick access during stress or outages
+- Open-source knowledge base that can be improved by contributors
+
+## Project structure
+
+```bash
+src/
+  components/       reusable UI and layout pieces
+  data/             section metadata and app content references
+  hooks/            app logic and helpers
+  lib/              routing, content sync, and app utilities
+  pages/            route-based screens and article views
+  App.tsx           root application shell
+public/
+  content/          markdown guides and practical articles
+  content-manifest.json  article metadata used by the app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Main content areas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The app is organized around core life-safety themes:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Electricity and protection
+- Water and purification
+- Health and heat resilience
+- Food security and refrigeration
+- Remote work and connectivity
+- Emergency applications and contacts
+- Lighting and household safety
+- Passive cooling and resilient design
+
+## Tech stack
+
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui-inspired component system
+- Markdown-based content storage
+- IndexedDB-backed offline sync
+- Progressive Web App support
+
+## Running locally
+
+```bash
+npm install
+npm run dev
 ```
+
+Then open the local Vite URL in the browser.
+
+To build for production:
+
+```bash
+npm run build
+```
+
+## Contributing
+
+This project is meant to be open and collaborative.
+
+You can contribute by:
+
+- improving existing articles
+- adding new practical guides
+- clarifying advice for local conditions
+- translating or adapting content for broader access
+- improving usability and accessibility
+
+## Important note
+
+This project is a practical information resource, not a substitute for professional emergency or medical advice. In critical situations, always follow local authorities, trained professionals, and official emergency services.
+
+## License
+
+This project is open-source and intended for community utility. Check the repository license for details.
+
+## Summary
+
+Hana 3aychin is a resilience toolkit for everyday crisis conditions: a simple app that turns complex advice into practical, accessible guidance when people need it most.
