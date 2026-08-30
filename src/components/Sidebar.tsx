@@ -39,9 +39,9 @@ export default function Sidebar({ route, open, onClose, theme, onToggleTheme }: 
       {open && <button className="nav-scrim" onClick={onClose} aria-label="إغلاق القائمة" />}
       <nav id="site-nav" className={`side-nav${open ? ' open' : ''}`} aria-label="فهرس الموقع">
         <a className="brand" href="#/" onClick={onClose}>
-          <img src="./icons/icon-192.png" alt="شعار هنا عايشين" width="44" height="44" />
+          <img src="./icons/icon-192.png" alt="شعار هانا عايشين" width="44" height="44" />
           <span>
-            <span className="brand-name">هنا عايشين</span>
+            <span className="brand-name">هانا عايشين</span>
             <span className="brand-sub" style={{ display: 'block' }}>دليل الصمود — تونس 2026</span>
           </span>
         </a>

@@ -65,7 +65,7 @@ export default function App() {
           <Menu size={20} aria-hidden="true" />
         </button>
         <a href="#/" style={{ textDecoration: 'none', color: 'var(--ink)', fontWeight: 800, fontFamily: "'Noto Kufi Arabic', sans-serif" }}>
-          هنا عايشين
+          هانا عايشين
         </a>
       </div>
 

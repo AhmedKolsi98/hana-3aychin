@@ -2,7 +2,7 @@
 slug: offline-pwa
 section: work
 lang: ar
-title: "لماذا يعمل موقع «هنا عايشين» دون إنترنت؟"
+title: "لماذا يعمل موقع «هانا عايشين» دون إنترنت؟"
 summary: "شرح مبسّط لتقنية PWA بفلسفة «دون اتصال أولاً»"
 updatedAt: 2026-08-28
 order: 2

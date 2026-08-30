@@ -35,7 +35,7 @@ export default function Contribute() {
           <span style={{ color: 'var(--accent)', display: 'inline-flex' }} aria-hidden="true">
             <HeartHandshake size={30} strokeWidth={2.2} />
           </span>
-          كيف تساهم في «هنا عايشين»؟
+          كيف تساهم في «هانا عايشين»؟
         </h1>
         <p className="sub">
           هذا الدليل مجهود مواطني تطوّعي — كل تصحيح أو اقتراح منك قد يصل إلى عائلة تحتاجه في ذروة الانقطاع.
@@ -43,7 +43,7 @@ export default function Contribute() {
       </header>
 
       <div className="contrib-grid">
-        <a className="contrib-card" href={`mailto:${EMAIL}?subject=${encodeURIComponent('اقتراح — هنا عايشين')}`}>
+        <a className="contrib-card" href={`mailto:${EMAIL}?subject=${encodeURIComponent('اقتراح — هانا عايشين')}`}>
           <span className="contrib-ico" aria-hidden="true"><Mail size={26} strokeWidth={2} /></span>
           <span className="contrib-title">راسلني مباشرة</span>
           <span className="contrib-text">لأي اقتراح، تصحيح، أو ملاحظة — أقرأ كل الرسائل.</span>

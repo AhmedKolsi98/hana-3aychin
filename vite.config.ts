@@ -14,8 +14,8 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['fonts/*.woff2', 'icons/*.png', 'content/*.md', 'content-manifest.json'],
       manifest: {
-        name: 'هنا عايشين — Hana 3aychin',
-        short_name: 'هنا عايشين',
+        name: 'هانا عايشين — Hana 3aychin',
+        short_name: 'هانا عايشين',
         description: 'دليل الصمود أمام أزمة الكهرباء والماء والحرّ في تونس — يعمل دون اتصال.',
         lang: 'ar',
         dir: 'rtl',
