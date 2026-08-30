@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="هنا عايشين — دليلك العملي للصمود أمام أزمة الكهرباء والماء والحرّ في تونس. يعمل دون اتصال بالإنترنت." />
+    <meta name="theme-color" content="#2b1703" />
+    <link rel="stylesheet" href="./fonts/fonts.css" />
+    <link rel="icon" type="image/png" href="./icons/icon-64.png" />
+    <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+    <title>هنا عايشين — Hana 3aychin</title>
+    <script>
+      // No-flash theme init: manual choice > system > night hours
+      (function () {
+        try {
+          var saved = localStorage.getItem('hana-theme');
+          var dark = saved ? saved === 'dark'
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ||
+               (new Date().getHours() >= 19 || new Date().getHours() < 6));
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
