@@ -45,9 +45,43 @@ src/
   pages/            route-based screens and article views
   App.tsx           root application shell
 public/
-  content/          markdown guides and practical articles
-  content-manifest.json  article metadata used by the app
+  content/          markdown guides, and _meta.json (sections + emergency numbers)
+  content-manifest.json  generated — see below, never edit by hand
+scripts/
+  build-manifest.mjs     rebuilds the manifest and validates the content
 ```
+
+## Content workflow
+
+Everything the app lists — the sections, their order and icons, the emergency
+numbers, and the guides themselves — is content, not code:
+
+- `public/content/_meta.json` declares the sections and the emergency numbers.
+- `public/content/<slug>.md` is one guide, with a small frontmatter block.
+
+`public/content-manifest.json` is **generated** from those two. Run:
+
+```bash
+npm run manifest
+```
+
+after any content change (it also runs automatically before `npm run build`).
+If anything is inconsistent — a guide pointing at a section that does not
+exist, an icon that is not in the whitelist, a phone number a handset could
+not dial — the command names the offending entry and stops without writing,
+so a broken guide never reaches a deploy.
+
+### Adding a section
+
+1. Add an entry to `sections` in `_meta.json`: an `id`, an `order`, an `icon`
+   from the whitelist in `scripts/validate.mjs`, and `title` / `sub` with
+   at least their Arabic text.
+2. Drop one or more `.md` guides into `public/content/` whose frontmatter
+   `section:` matches that `id`.
+3. Run `npm run manifest`.
+
+No TypeScript involved — the section appears in the sidebar, on the home
+grid, and at `#/<id>`. Run `npm test` to check the tooling itself.
 
 ## Main content areas
 
@@ -98,6 +132,9 @@ You can contribute by:
 - clarifying advice for local conditions
 - translating or adapting content for broader access
 - improving usability and accessibility
+
+Content changes need no build step beyond `npm run manifest` — see the content
+workflow above.
 
 ## Important note
 

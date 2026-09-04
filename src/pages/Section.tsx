@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { SECTIONS, type SectionDef } from '../data/sections';
-import { useSectionArticles } from '../lib/content';
+import { ICONS, FALLBACK_ICON, type SectionDef } from '../data/sections';
+import { useSectionArticles, useSiteMeta } from '../lib/content';
 import Markdown from '../components/Markdown';
 import JavelCalculator from '../components/tools/JavelCalculator';
 import FridgeChecker from '../components/tools/FridgeChecker';
@@ -18,9 +18,11 @@ function SectionTools({ section }: { section: SectionDef }) {
 
 export default function SectionPage({ route }: { route: string }) {
   // route: '/health' or '/health/sun-uv-animals'
-  const sectionPath = '/' + (route.split('/')[1] ?? '');
   const articleSlug = route.split('/')[2] ?? '';
-  const section = SECTIONS.find((s) => s.path === sectionPath);
+  const { sections, contacts } = useSiteMeta();
+  const samu = contacts.find((c) => c.id === 'samu');
+  const civilProtection = contacts.find((c) => c.id === 'civil-protection');
+  const section = sections.find((s) => s.id === route.split('/')[1]);
   const articles = useSectionArticles(section?.id ?? '');
 
   // Sidebar subtitle navigation: scroll the targeted guide into view.
@@ -39,17 +41,17 @@ export default function SectionPage({ route }: { route: string }) {
     );
   }
 
-  const Icon = section.icon;
+  const Icon = ICONS[section.icon] ?? FALLBACK_ICON;
 
   return (
     <>
       <header className="section-head">
-        <div className="crumb"><a href="#/">الرئيسية</a> / {section.title}</div>
+        <div className="crumb"><a href="#/">الرئيسية</a> / {section.title.ar}</div>
         <h1 style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><Icon size={30} strokeWidth={2.2} /></span>
-          {section.title}
+          {section.title.ar}
         </h1>
-        <p className="sub">{section.sub}</p>
+        <p className="sub">{section.sub.ar}</p>
       </header>
 
       <SectionTools section={section} />
@@ -74,7 +76,7 @@ export default function SectionPage({ route }: { route: string }) {
       ))}
 
       <div className="foot-note">
-        <span>المحتوى إرشادي ولا يعوّض الطبيب أو أعوان الإنقاذ — في الحالات الحرجة <bdi dir="ltr" className="num">190</bdi> / <bdi dir="ltr" className="num">198</bdi></span>
+        <span>المحتوى إرشادي ولا يعوّض الطبيب أو أعوان الإنقاذ — في الحالات الحرجة <bdi dir="ltr" className="num">{samu?.number ?? '190'}</bdi> / <bdi dir="ltr" className="num">{civilProtection?.number ?? '198'}</bdi></span>
         <button className="btn" onClick={() => window.print()} style={{ minHeight: 40, padding: '6px 16px', fontSize: 13.5 }}>
           اطبع هذا القسم كقائمة ورقية
         </button>

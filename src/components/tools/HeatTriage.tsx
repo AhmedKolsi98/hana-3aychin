@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Siren, ThermometerSun } from 'lucide-react';
+import { useSiteMeta } from '../../lib/content';
 
 const STROKE_SIGNS = [
   'حرارة الجسم تتجاوز 39.5 – 40°C',
@@ -22,6 +23,9 @@ const EXHAUSTION_SIGNS = [
  * Offline. Any stroke sign → emergency state.
  */
 export default function HeatTriage() {
+  const { contacts } = useSiteMeta();
+  const samu = contacts.find((c) => c.id === 'samu');
+  const civilProtection = contacts.find((c) => c.id === 'civil-protection');
   const [stroke, setStroke] = useState<string[]>([]);
   const [exhaustion, setExhaustion] = useState<string[]>([]);
 
@@ -67,8 +71,12 @@ export default function HeatTriage() {
             <Siren size={24} /> ضربة شمس — اتصل الآن
           </div>
           <div style={{ marginTop: 6, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <a className="btn danger" href="tel:190"><bdi dir="ltr" className="num">190</bdi> الإسعاف الطبي</a>
-            <a className="btn danger" href="tel:198"><bdi dir="ltr" className="num">198</bdi> الحماية المدنية</a>
+            {samu && (
+              <a className="btn danger" href={samu.tel}><bdi dir="ltr" className="num">{samu.number}</bdi> الإسعاف الطبي</a>
+            )}
+            {civilProtection && (
+              <a className="btn danger" href={civilProtection.tel}><bdi dir="ltr" className="num">{civilProtection.number}</bdi> الحماية المدنية</a>
+            )}
           </div>
           <ol style={{ margin: '10px 0 0', paddingInlineStart: 22 }}>
             <li>انقل المصاب إلى أبرد مكان متاح واخلع الملابس الزائدة.</li>
@@ -82,7 +90,7 @@ export default function HeatTriage() {
           <div className="big" style={{ color: 'var(--warn)' }}>إنهاك حراري — برّد، رطّب، راقب</div>
           <div style={{ marginTop: 6 }}>
             انقل المصاب إلى الظل، برّده بكمادات ومروحة، واسقه ماءً أو محلول إمهاء بشربات صغيرة.
-            راقبه عن قرب: أي علامة من علامات الخطر أعلاه تعني الاتصال فورًا بـ <bdi dir="ltr" className="num">190</bdi>.
+            راقبه عن قرب: أي علامة من علامات الخطر أعلاه تعني الاتصال فورًا بـ <bdi dir="ltr" className="num">{samu?.number ?? '190'}</bdi>.
           </div>
         </div>
       )}

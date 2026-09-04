@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "manifest": "node scripts/build-manifest.mjs",
+    "prebuild": "npm run manifest",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test \"scripts/**/*.test.mjs\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

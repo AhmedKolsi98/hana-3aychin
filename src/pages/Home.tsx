@@ -1,10 +1,12 @@
 import { ArrowLeft } from 'lucide-react';
-import { SECTIONS } from '../data/sections';
+import { useSiteMeta } from '../lib/content';
 import BlackoutChecklist from '../components/tools/BlackoutChecklist';
 import OfflineCard from '../components/OfflineCard';
 
 /** Home: crisis context, then a dense field-manual index — utility first, no marketing hero. */
 export default function Home() {
+  const { sections } = useSiteMeta();
+
   return (
     <>
       <header className="hero">
@@ -28,18 +30,16 @@ export default function Home() {
       <div className="section-index">
         <h2>الأدلة — ثمانية أقسام + المرجع</h2>
         <div className="index-grid">
-          {SECTIONS.map((s, i) => {
-            return (
-              <a key={s.id} className="index-card" href={`#${s.path}`}>
-                <span className="idx num" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
-                <span>
-                  <h3>{s.title}</h3>
-                  <p>{s.sub}</p>
-                </span>
-                <span className="go"><ArrowLeft size={17} /></span>
-              </a>
-            );
-          })}
+          {sections.map((s, i) => (
+            <a key={s.id} className="index-card" href={`#/${s.id}`}>
+              <span className="idx num" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
+              <span>
+                <h3>{s.title.ar}</h3>
+                <p>{s.sub.ar}</p>
+              </span>
+              <span className="go"><ArrowLeft size={17} /></span>
+            </a>
+          ))}
         </div>
       </div>
 

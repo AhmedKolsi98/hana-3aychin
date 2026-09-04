@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Moon, Sun, Home, ChevronDown, HeartHandshake } from 'lucide-react';
-import { SECTIONS } from '../data/sections';
-import { useAllArticles } from '../lib/content';
+import { ICONS, FALLBACK_ICON } from '../data/sections';
+import { useAllArticles, useSiteMeta } from '../lib/content';
 
 interface Props {
   route: string;
@@ -13,6 +13,7 @@ interface Props {
 
 export default function Sidebar({ route, open, onClose, theme, onToggleTheme }: Props) {
   const articles = useAllArticles();
+  const { sections } = useSiteMeta();
 
   // route shapes: '/' | '/health' | '/health/sun-uv-animals'
   const currentSection = '/' + (route.split('/')[1] ?? '');
@@ -57,22 +58,24 @@ export default function Sidebar({ route, open, onClose, theme, onToggleTheme }: 
             الرئيسية
           </a>
 
-          {SECTIONS.map((s, i) => {
-            const Icon = s.icon;
-            const active = currentSection === s.path;
+          {sections.map((s, i) => {
+            const Icon = ICONS[s.icon] ?? FALLBACK_ICON;
+            const path = `/${s.id}`;
+            const title = s.title.ar;
+            const active = currentSection === path;
             const subs = bySection.get(s.id) ?? [];
-            const expanded = isExpanded(s.id, s.path) && subs.length > 0;
+            const expanded = isExpanded(s.id, path) && subs.length > 0;
             return (
               <div className="nav-group" key={s.id}>
                 <div className="nav-row">
                   <a
-                    href={`#${s.path}`}
+                    href={`#${path}`}
                     onClick={onClose}
                     className={`nav-item${active && !currentSlug ? ' active' : ''}${active ? ' in-section' : ''}`}
                     aria-current={active ? 'page' : undefined}
                   >
                     <span className="nav-ico" aria-hidden="true"><Icon size={19} strokeWidth={2.2} /></span>
-                    {s.title}
+                    {title}
                     <span className="nav-num num" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
                   </a>
                   {subs.length > 0 && (
@@ -81,7 +84,7 @@ export default function Sidebar({ route, open, onClose, theme, onToggleTheme }: 
                       className="nav-chev"
                       aria-expanded={expanded}
                       aria-controls={`nav-sub-${s.id}`}
-                      aria-label={expanded ? `طيّ قائمة ${s.title}` : `فرد قائمة ${s.title}`}
+                      aria-label={expanded ? `طيّ قائمة ${title}` : `فرد قائمة ${title}`}
                       onClick={() => setToggled((t) => ({ ...t, [s.id]: !expanded }))}
                     >
                       <ChevronDown size={16} strokeWidth={2.4} aria-hidden="true" />
@@ -95,7 +98,7 @@ export default function Sidebar({ route, open, onClose, theme, onToggleTheme }: 
                       return (
                         <li key={a.slug}>
                           <a
-                            href={`#${s.path}/${a.slug}`}
+                            href={`#${path}/${a.slug}`}
                             onClick={onClose}
                             className={subActive ? 'active' : ''}
                             aria-current={subActive ? 'location' : undefined}
