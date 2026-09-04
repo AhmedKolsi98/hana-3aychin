@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import { db, type ArticleRow } from './db';
+import type { SectionDef, EmergencyContact } from '../data/sections';
+import {
+  sections as seedSections,
+  emergencyContacts as seedContacts,
+} from '../../public/content-manifest.json';
 
 export interface ManifestArticle {
   slug: string;
@@ -15,7 +20,10 @@ export interface ManifestArticle {
 }
 
 export interface ContentManifest {
+  schemaVersion: number;
   contentVersion: string;
+  sections: SectionDef[];
+  emergencyContacts: EmergencyContact[];
   articles: ManifestArticle[];
 }
 
@@ -26,6 +34,34 @@ export function djb2(s: string): string {
   let h = 5381;
   for (let i = 0; i < s.length; i++) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0;
   return h.toString(16);
+}
+
+let siteMeta = {
+  sections: seedSections as SectionDef[],
+  contacts: seedContacts as EmergencyContact[],
+};
+const metaListeners = new Set<() => void>();
+
+function setSiteMeta(sections?: SectionDef[], contacts?: EmergencyContact[]) {
+  if (!sections?.length || !contacts?.length) return;
+  siteMeta = { sections, contacts };
+  metaListeners.forEach((l) => l());
+}
+
+async function loadStoredSiteMeta(): Promise<void> {
+  const [sections, contacts] = await db.meta.bulkGet(['sections', 'contacts']);
+  if (sections && contacts) setSiteMeta(JSON.parse(sections.value), JSON.parse(contacts.value));
+}
+
+export function useSiteMeta() {
+  const [meta, setMeta] = useState(siteMeta);
+  useEffect(() => {
+    const listener = () => setMeta(siteMeta);
+    listener();
+    metaListeners.add(listener);
+    return () => { metaListeners.delete(listener); };
+  }, []);
+  return meta;
 }
 
 const base = import.meta.env.BASE_URL || './';
@@ -93,7 +129,9 @@ export async function syncContent(force = false): Promise<void> {
   if (syncReport.state === 'syncing') return;
   emit({ state: 'syncing' });
   try {
+    await loadStoredSiteMeta();
     const manifest = await fetchManifest();
+    setSiteMeta(manifest.sections, manifest.emergencyContacts);
     const stored = await db.articles.toArray();
     const storedMap = new Map(stored.map((a) => [a.slug, a]));
     const changed = manifest.articles.filter((a) => {
@@ -117,8 +155,12 @@ export async function syncContent(force = false): Promise<void> {
     }
 
     const now = new Date().toISOString();
-    await db.meta.put({ key: 'lastSync', value: now });
-    await db.meta.put({ key: 'contentVersion', value: manifest.contentVersion });
+    await db.meta.bulkPut([
+      { key: 'lastSync', value: now },
+      { key: 'contentVersion', value: manifest.contentVersion },
+      { key: 'sections', value: JSON.stringify(manifest.sections) },
+      { key: 'contacts', value: JSON.stringify(manifest.emergencyContacts) },
+    ]);
     emit({ state: 'done', lastSync: now });
   } catch {
     const count = await db.articles.count();

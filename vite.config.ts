@@ -35,7 +35,7 @@ export default defineConfig({
         // Infographics (img/**) are intentionally excluded from the offline cache
         // to keep the precache light; articles stay fully readable without them.
         globPatterns: ['**/*.{js,css,html,woff2,md,json}'],
-        globIgnores: ['img/**'],
+        globIgnores: ['img/**', 'content/_meta.json'],
         navigateFallback: 'index.html',
         maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         cleanupOutdatedCaches: true,

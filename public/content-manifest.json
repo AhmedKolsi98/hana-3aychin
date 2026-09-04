@@ -1,5 +1,154 @@
 {
+ "schemaVersion": 2,
  "contentVersion": "2026-08-29",
+ "sections": [
+  {
+   "id": "electricity",
+   "order": 1,
+   "icon": "Zap",
+   "title": {
+    "ar": "الكهرباء وحماية الأجهزة"
+   },
+   "sub": {
+    "ar": "ريليه الحماية، صيانة المكيف، والتعويض من STEG"
+   }
+  },
+  {
+   "id": "water",
+   "order": 2,
+   "icon": "Droplets",
+   "title": {
+    "ar": "الماء: التخزين والتطهير"
+   },
+   "sub": {
+    "ar": "تطهير الماجل بالجافيل وأجهزة التناضح العكسي"
+   }
+  },
+  {
+   "id": "health",
+   "order": 3,
+   "icon": "ThermometerSun",
+   "title": {
+    "ar": "الصحة والحرّ الشديد"
+   },
+   "sub": {
+    "ar": "الأطفال والمسنّون، ضربة الشمس، والأنسولين"
+   }
+  },
+  {
+   "id": "food",
+   "order": 4,
+   "icon": "UtensilsCrossed",
+   "title": {
+    "ar": "الأمن الغذائي والحفظ"
+   },
+   "sub": {
+    "ar": "قواعد الثلاجة، وعاء الزير، والقَديد"
+   }
+  },
+  {
+   "id": "work",
+   "order": 5,
+   "icon": "Laptop",
+   "title": {
+    "ar": "العمل عن بُعد"
+   },
+   "sub": {
+    "ar": "تكرارية في الطاقة والاتصال"
+   }
+  },
+  {
+   "id": "apps-contacts",
+   "order": 6,
+   "icon": "PhoneCall",
+   "title": {
+    "ar": "تطبيقات وأرقام الطوارئ"
+   },
+   "sub": {
+    "ar": "فمّا ضوء، وينو الضوء، وكل الأرقام الحرجة"
+   }
+  },
+  {
+   "id": "light-security",
+   "order": 7,
+   "icon": "Flame",
+   "title": {
+    "ar": "الإضاءة والأمن"
+   },
+   "sub": {
+    "ar": "مصباح الزيت المنزلي والإنذارات الشمسية"
+   }
+  },
+  {
+   "id": "passive-cooling",
+   "order": 8,
+   "icon": "Wind",
+   "title": {
+    "ar": "التبريد السلبي والعمارة"
+   },
+   "sub": {
+    "ar": "حكمة الأجداد لبيت أبرد دون كهرباء"
+   }
+  },
+  {
+   "id": "about",
+   "order": 9,
+   "icon": "Info",
+   "title": {
+    "ar": "حول المشروع"
+   },
+   "sub": {
+    "ar": "مفتوح المصدر — المبادئ والمصادر والمساهمة"
+   }
+  }
+ ],
+ "emergencyContacts": [
+  {
+   "id": "civil-protection",
+   "order": 1,
+   "number": "198",
+   "tel": "tel:198",
+   "name": {
+    "ar": "الحماية المدنية"
+   }
+  },
+  {
+   "id": "samu",
+   "order": 2,
+   "number": "190",
+   "tel": "tel:190",
+   "name": {
+    "ar": "الإسعاف SAMU"
+   }
+  },
+  {
+   "id": "police",
+   "order": 3,
+   "number": "197",
+   "tel": "tel:197",
+   "name": {
+    "ar": "شرطة النجدة"
+   }
+  },
+  {
+   "id": "national-guard",
+   "order": 4,
+   "number": "193",
+   "tel": "tel:193",
+   "name": {
+    "ar": "الحرس الوطني"
+   }
+  },
+  {
+   "id": "poison-control",
+   "order": 5,
+   "number": "71 335 500",
+   "tel": "tel:+21671335500",
+   "name": {
+    "ar": "مركز السموم"
+   }
+  }
+ ],
  "articles": [
   {
    "slug": "about-project",
@@ -10,8 +159,8 @@
    "updatedAt": "2026-08-28",
    "order": 1,
    "file": "content/about-project.md",
-   "checksum": "2b66cdf2",
-   "size": 3261
+   "checksum": "3478978f",
+   "size": 3265
   },
   {
    "slug": "ac-maintenance",
@@ -94,7 +243,7 @@
    "updatedAt": "2026-08-28",
    "order": 4,
    "file": "content/heat-triage.md",
-   "checksum": "e1241aec",
+   "checksum": "830694d1",
    "size": 1914
   },
   {
@@ -142,8 +291,8 @@
    "updatedAt": "2026-08-28",
    "order": 2,
    "file": "content/offline-pwa.md",
-   "checksum": "dc438c06",
-   "size": 1424
+   "checksum": "f18eb081",
+   "size": 1426
   },
   {
    "slug": "oil-lamp",
@@ -178,8 +327,8 @@
    "updatedAt": "2026-08-28",
    "order": 1,
    "file": "content/outage-apps.md",
-   "checksum": "1bbad27e",
-   "size": 2340
+   "checksum": "163262e4",
+   "size": 2342
   },
   {
    "slug": "remote-work",
@@ -214,7 +363,7 @@
    "updatedAt": "2026-08-28",
    "order": 3,
    "file": "content/steg-compensation.md",
-   "checksum": "9d432f1c",
+   "checksum": "377cce1",
    "size": 2460
   },
   {
